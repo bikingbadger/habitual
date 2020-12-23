@@ -1,24 +1,24 @@
 <template>
   <h1>{{ name }}</h1>
-  <ul>
-    <li v-for="habit in habits">
-      
-    </li>
-  </ul>
+  <habit-store :habits="storedHabits"></habit-store>
 </template>
 
 <script>
+import HabitStore from './components/habits/HabitsStore';
 export default {
+  components: {
+    HabitStore,
+  },
   data() {
     return {
       name: 'Habitual',
-      habits: [{name: 'Read '},
-        {name: 'Meditate'},
-        {name: 'Stimulants'}
-        ]
+      storedHabits: [
+        { id: 1, name: 'Read ' },
+        { id: 2, name: 'Meditate' },
+        { id: 3, name: 'Stimulants' },
+      ],
     };
   },
-  components: {},
 };
 </script>
 
