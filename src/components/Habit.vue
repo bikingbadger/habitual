@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'habit',
   props: {
     id: Number,
     name: String,
