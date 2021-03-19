@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import HabitStore from './components/habits/HabitsStore';
+import HabitStore from './components/HabitsStore';
 export default {
   components: {
     HabitStore,
