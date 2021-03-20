@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import HabitStore from './components/habits/HabitsStore';
+import HabitStore from './components/HabitsStore';
 export default {
   components: {
     HabitStore,
@@ -13,9 +13,19 @@ export default {
     return {
       name: 'Habitual',
       storedHabits: [
-        { id: 1, name: 'Read ' },
-        { id: 2, name: 'Meditate' },
-        { id: 3, name: 'Stimulants' },
+        {
+          id: 1,
+          name: 'Read ',
+          history: [
+            { habitId: 1, date: '01/02/21', completed: true },
+            { habitId: 1, date: '02/02/21', completed: false },
+            { habitId: 1, date: '03/02/21', completed: true },
+            { habitId: 1, date: '04/02/21', completed: false },
+            { habitId: 1, date: '05/02/21', completed: true },
+            { habitId: 1, date: '06/02/21', completed: true },
+            { habitId: 1, date: '07/02/21', completed: true },
+          ],
+        },
       ],
     };
   },
