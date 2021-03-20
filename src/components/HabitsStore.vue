@@ -1,18 +1,18 @@
 <template>
   <ul>
-    <habit
-      v-for="habit in habits"
-      :key="habit.id"
-      :id="habit.id"
-      :name="habit.name"
-    ></habit>
+    <HabitListItem
+      v-for="HabitListItem in HabitListItems"
+      :key="HabitListItem.id"
+      :id="HabitListItem.id"
+      :name="HabitListItem.name"
+    ></HabitListItem>
   </ul>
 </template>
 
 <script>
-import Habit from './Habit';
+import HabitListItem from './HabitListItem';
 export default {
-  components: { Habit },
-  props: ['habits'],
+  components: { HabitListItem },
+  props: ['HabitListItems'],
 };
 </script>
