@@ -8,18 +8,23 @@
   </button>
 
   <LoginModal v-show="isLoginVisible" @close="closeLoginModal"> </LoginModal>
-  <RegisterModal v-show="isRegisterVisible" @close="closeRegisterModal">
+  <RegisterModal
+    v-show="isRegisterVisible"
+    @close="closeRegisterModal"
+    @register="registerUser"
+  >
   </RegisterModal>
-  <habit-store :habits="storedHabits"></habit-store>
+  <habit-list :habits="storedHabits"></habit-list>
 </template>
 
 <script>
-import HabitStore from './components/HabitsStore';
+import store from '@/store';
+import HabitList from '@/components/HabitsList';
 import LoginModal from '@/components/LoginModal';
 import RegisterModal from '@/components/RegisterModal';
 export default {
   components: {
-    HabitStore,
+    HabitList,
     LoginModal,
     RegisterModal,
   },
@@ -56,6 +61,11 @@ export default {
       this.isRegisterVisible = true;
     },
     closeRegisterModal() {
+      this.isRegisterVisible = false;
+    },
+    registerUser(email, password) {
+      console.log(email, password);
+      store.dispatch('register', { email, password });
       this.isRegisterVisible = false;
     },
   },
