@@ -7,7 +7,11 @@
     Register
   </button>
 
-  <LoginModal v-show="isLoginVisible" @close="closeLoginModal"> </LoginModal>
+  <LoginModal
+    v-show="isLoginVisible"
+    @close="closeLoginModal"
+    @login="loginUser"
+  />
   <RegisterModal
     v-show="isRegisterVisible"
     @close="closeRegisterModal"
@@ -63,10 +67,13 @@ export default {
     closeRegisterModal() {
       this.isRegisterVisible = false;
     },
-    registerUser(email, password) {
-      console.log(email, password);
-      store.dispatch('register', { email, password });
+    registerUser(user) {
+      store.dispatch('register', user);
       this.isRegisterVisible = false;
+    },
+    loginUser(user) {
+      store.dispatch('login', user);
+      this.isLoginVisible = false;
     },
   },
 };

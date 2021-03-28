@@ -50,7 +50,7 @@ export default {
       this.$emit('close');
     },
     registerUser() {
-      this.$emit('register', this.email, this.password);
+      this.$emit('register', { email: this.email, password: this.password });
     },
   },
 };
