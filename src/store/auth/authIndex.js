@@ -10,6 +10,7 @@ export default {
       email: '',
       registrationError: false,
       errorMsg: '',
+      isLoggedIn: false,
     };
   },
   mutations: authMutations,

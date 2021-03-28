@@ -1,12 +1,19 @@
 <template>
   <h1>{{ name }}</h1>
-  <button type="button" class="btn" @click="showLoginModal">
-    Login
-  </button>
-  <button type="button" class="btn" @click="showRegisterModal">
-    Register
-  </button>
-
+  <div v-if="isLoggedIn">
+    <p>{{ user }}</p>
+    <button type="button" class="btn" @click="logout">
+      Logout
+    </button>
+  </div>
+  <div v-else>
+    <button type="button" class="btn" @click="showLoginModal">
+      Login
+    </button>
+    <button type="button" class="btn" @click="showRegisterModal">
+      Register
+    </button>
+  </div>
   <LoginModal
     v-show="isLoginVisible"
     @close="closeLoginModal"
@@ -53,6 +60,14 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return store.getters.isLoggedIn;
+    },
+    user() {
+      return store.getters.getUser;
+    },
   },
   methods: {
     showLoginModal() {
