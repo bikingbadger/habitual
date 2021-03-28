@@ -1,25 +1,33 @@
 <template>
   <h1>{{ name }}</h1>
   <button type="button" class="btn" @click="showLoginModal">
-    Open Modal!
+    Login
+  </button>
+  <button type="button" class="btn" @click="showRegisterModal">
+    Register
   </button>
 
-  <LoginModal v-show="isLoginVisible" @close="closeLoginModal" />
+  <LoginModal v-show="isLoginVisible" @close="closeLoginModal"> </LoginModal>
+  <RegisterModal v-show="isRegisterVisible" @close="closeRegisterModal">
+  </RegisterModal>
   <habit-store :habits="storedHabits"></habit-store>
 </template>
 
 <script>
 import HabitStore from './components/HabitsStore';
 import LoginModal from '@/components/LoginModal';
+import RegisterModal from '@/components/RegisterModal';
 export default {
   components: {
     HabitStore,
     LoginModal,
+    RegisterModal,
   },
   data() {
     return {
       name: 'Habitual',
-      isLoginVisible: true,
+      isLoginVisible: false,
+      isRegisterVisible: false,
       storedHabits: [
         {
           id: 1,
@@ -43,6 +51,12 @@ export default {
     },
     closeLoginModal() {
       this.isLoginVisible = false;
+    },
+    showRegisterModal() {
+      this.isRegisterVisible = true;
+    },
+    closeRegisterModal() {
+      this.isRegisterVisible = false;
     },
   },
 };

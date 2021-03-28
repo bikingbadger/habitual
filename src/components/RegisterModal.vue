@@ -3,7 +3,7 @@
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          <h1>Login</h1>
+          <h1>Register</h1>
         </slot>
         <button type="button" class="btn-close" @click="close">
           x
@@ -21,7 +21,7 @@
 
       <footer class="modal-footer">
         <slot name="footer">
-          <button>Login</button>
+          <button>Register</button>
         </slot>
         <!-- <button type="button" class="btn-green" @click="close">
           Close Modal
