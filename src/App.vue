@@ -90,6 +90,9 @@ export default {
       store.dispatch('login', user);
       this.isLoginVisible = false;
     },
+    logout(){
+      store.dispatch('logout');
+    }
   },
 };
 </script>

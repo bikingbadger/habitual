@@ -43,4 +43,12 @@ export default {
       commit('authFail', err);
     }
   },
+  async logout({ commit }) {
+    try {
+      await firebase.auth().signOut();
+      commit('logout');
+    } catch (err) {
+      console.error(err);
+    }
+  },
 };

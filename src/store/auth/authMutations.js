@@ -12,4 +12,9 @@ export default {
     state.isLoggedIn = false;
     state.errorMsg = error.message;
   },
+  logout(state) {
+    state.email = null;
+    state.username = null;
+    state.isLoggedIn = false;
+  },
 };
