@@ -14,18 +14,24 @@
       Register
     </button>
   </div>
-  <LoginModal
+  <habit-list :habits="storedHabits"></habit-list>
+  <button type="button" class="btn" @click="showHabitCreateModal">
+    Create
+  </button>
+  <login-modal
     v-show="isLoginVisible"
     @close="closeLoginModal"
     @login="loginUser"
   />
-  <RegisterModal
+  <register-modal
     v-show="isRegisterVisible"
     @close="closeRegisterModal"
     @register="registerUser"
-  >
-  </RegisterModal>
-  <habit-list :habits="storedHabits"></habit-list>
+  />
+  <habit-create-modal
+    v-show="isHabitCreateVisible"
+    @close="closeHabitCreateModal"
+  />
 </template>
 
 <script>
@@ -33,18 +39,21 @@ import store from '@/store';
 import HabitList from '@/components/HabitsList';
 import LoginModal from '@/components/LoginModal';
 import RegisterModal from '@/components/RegisterModal';
+import HabitCreateModal from '@/components/HabitCreateModal';
+
 export default {
   components: {
     HabitList,
     LoginModal,
     RegisterModal,
+    HabitCreateModal,
   },
   data() {
     return {
       name: 'Habitual',
       isLoginVisible: false,
       isRegisterVisible: false,
-      
+      isHabitCreateVisible: false,
     };
   },
   computed: {
@@ -56,7 +65,7 @@ export default {
     },
     storedHabits() {
       return store.getters.getHabits;
-    }
+    },
   },
   methods: {
     showLoginModal() {
@@ -71,6 +80,12 @@ export default {
     closeRegisterModal() {
       this.isRegisterVisible = false;
     },
+    showHabitCreateModal() {
+      this.isHabitCreateVisible = true;
+    },
+    closeHabitCreateModal() {
+      this.isHabitCreateVisible = false;
+    },
     registerUser(user) {
       store.dispatch('register', user);
       this.isRegisterVisible = false;
@@ -79,9 +94,9 @@ export default {
       store.dispatch('login', user);
       this.isLoginVisible = false;
     },
-    logout(){
+    logout() {
       store.dispatch('logout');
-    }
+    },
   },
 };
 </script>
