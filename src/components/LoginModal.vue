@@ -13,15 +13,20 @@
       <section class="modal-body">
         <slot name="body">
           <label for="email">email</label>
-          <input type="email" name="email" id="email" />
+          <input type="email" name="email" id="email" v-model="email" />
           <label for="password">password</label>
-          <input type="password" name="password" id="password" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            v-model="password"
+          />
         </slot>
       </section>
 
       <footer class="modal-footer">
         <slot name="footer">
-          <button>Login</button>
+          <button @click="login">Login</button>
         </slot>
         <!-- <button type="button" class="btn-green" @click="close">
           Close Modal
@@ -34,9 +39,18 @@
 <script>
 export default {
   name: 'Login',
+  data() {
+    return {
+      email: null,
+      password: null,
+    };
+  },
   methods: {
     close() {
       this.$emit('close');
+    },
+    login() {
+      this.$emit('login', { email: this.email, password: this.password });
     },
   },
 };

@@ -3,7 +3,6 @@ import authMutations from './authMutations';
 import authGetters from './authGetters';
 
 export default {
-  namespaced: true,
   state() {
     return {
       id: 0,
@@ -11,6 +10,7 @@ export default {
       email: '',
       registrationError: false,
       errorMsg: '',
+      isLoggedIn: false,
     };
   },
   mutations: authMutations,
