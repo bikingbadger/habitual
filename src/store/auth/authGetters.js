@@ -2,7 +2,10 @@ export default {
   isLoggedIn(state) {
     return state.isLoggedIn;
   },
-  getUser(state) {
+  getUserEmail(state) {
     return state.email;
+  },
+  getUserId(state) {
+    return state.id;
   },
 };

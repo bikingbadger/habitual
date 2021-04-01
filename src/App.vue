@@ -15,7 +15,12 @@
     </button>
   </div>
   <habit-list :habits="storedHabits"></habit-list>
-  <button type="button" class="btn" @click="showHabitCreateModal">
+  <button
+    v-if="isLoggedIn"
+    type="button"
+    class="btn"
+    @click="showHabitCreateModal"
+  >
     Create
   </button>
   <login-modal
@@ -62,7 +67,7 @@ export default {
       return store.getters.isLoggedIn;
     },
     user() {
-      return store.getters.getUser;
+      return store.getters.getUserEmail;
     },
     storedHabits() {
       return store.getters.getHabits;
