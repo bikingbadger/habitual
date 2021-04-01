@@ -14,18 +14,30 @@
       Register
     </button>
   </div>
-  <LoginModal
+  <habit-list :habits="storedHabits"></habit-list>
+  <button
+    v-if="isLoggedIn"
+    type="button"
+    class="btn"
+    @click="showHabitCreateModal"
+  >
+    Create
+  </button>
+  <login-modal
     v-show="isLoginVisible"
     @close="closeLoginModal"
     @login="loginUser"
   />
-  <RegisterModal
+  <register-modal
     v-show="isRegisterVisible"
     @close="closeRegisterModal"
     @register="registerUser"
-  >
-  </RegisterModal>
-  <habit-list :habits="storedHabits"></habit-list>
+  />
+  <habit-create-modal
+    v-show="isHabitCreateVisible"
+    @close="closeHabitCreateModal"
+    @addHabit="addHabit"
+  />
 </template>
 
 <script>
@@ -33,32 +45,21 @@ import store from '@/store';
 import HabitList from '@/components/HabitsList';
 import LoginModal from '@/components/LoginModal';
 import RegisterModal from '@/components/RegisterModal';
+import HabitCreateModal from '@/components/HabitCreateModal';
+
 export default {
   components: {
     HabitList,
     LoginModal,
     RegisterModal,
+    HabitCreateModal,
   },
   data() {
     return {
       name: 'Habitual',
       isLoginVisible: false,
       isRegisterVisible: false,
-      storedHabits: [
-        {
-          id: 1,
-          name: 'Read ',
-          history: [
-            { habitId: 1, date: '01/02/21', completed: true },
-            { habitId: 1, date: '02/02/21', completed: false },
-            { habitId: 1, date: '03/02/21', completed: true },
-            { habitId: 1, date: '04/02/21', completed: false },
-            { habitId: 1, date: '05/02/21', completed: true },
-            { habitId: 1, date: '06/02/21', completed: true },
-            { habitId: 1, date: '07/02/21', completed: true },
-          ],
-        },
-      ],
+      isHabitCreateVisible: false,
     };
   },
   computed: {
@@ -66,16 +67,29 @@ export default {
       return store.getters.isLoggedIn;
     },
     user() {
-      return store.getters.getUser;
+      return store.getters.getUserEmail;
+    },
+    storedHabits() {
+      return store.getters.getHabits;
     },
   },
   methods: {
+    /**
+     * Login related methods
+     */
     showLoginModal() {
       this.isLoginVisible = true;
     },
     closeLoginModal() {
       this.isLoginVisible = false;
     },
+    loginUser(user) {
+      store.dispatch('login', user);
+      this.closeLoginModal();
+    },
+    /**
+     * Registration related methods
+     */
     showRegisterModal() {
       this.isRegisterVisible = true;
     },
@@ -84,15 +98,24 @@ export default {
     },
     registerUser(user) {
       store.dispatch('register', user);
-      this.isRegisterVisible = false;
+      this.closeRegisterModal();
     },
-    loginUser(user) {
-      store.dispatch('login', user);
-      this.isLoginVisible = false;
+    /**
+     * Habit related methods
+     */
+    showHabitCreateModal() {
+      this.isHabitCreateVisible = true;
     },
-    logout(){
+    closeHabitCreateModal() {
+      this.isHabitCreateVisible = false;
+    },
+    addHabit(habit) {
+      store.dispatch('addHabit', habit);
+      this.closeHabitCreateModal();
+    },
+    logout() {
       store.dispatch('logout');
-    }
+    },
   },
 };
 </script>
