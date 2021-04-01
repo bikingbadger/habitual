@@ -31,6 +31,7 @@
   <habit-create-modal
     v-show="isHabitCreateVisible"
     @close="closeHabitCreateModal"
+    @addHabit="addHabit"
   />
 </template>
 
@@ -68,31 +69,44 @@ export default {
     },
   },
   methods: {
+    /**
+     * Login related methods
+     */
     showLoginModal() {
       this.isLoginVisible = true;
     },
     closeLoginModal() {
       this.isLoginVisible = false;
     },
+    loginUser(user) {
+      store.dispatch('login', user);
+      this.closeLoginModal();
+    },
+    /**
+     * Registration related methods
+     */
     showRegisterModal() {
       this.isRegisterVisible = true;
     },
     closeRegisterModal() {
       this.isRegisterVisible = false;
     },
+    registerUser(user) {
+      store.dispatch('register', user);
+      this.closeRegisterModal();
+    },
+    /**
+     * Habit related methods
+     */
     showHabitCreateModal() {
       this.isHabitCreateVisible = true;
     },
     closeHabitCreateModal() {
       this.isHabitCreateVisible = false;
     },
-    registerUser(user) {
-      store.dispatch('register', user);
-      this.isRegisterVisible = false;
-    },
-    loginUser(user) {
-      store.dispatch('login', user);
-      this.isLoginVisible = false;
+    addHabit(habit) {
+      store.dispatch('addHabit', habit);
+      this.closeHabitCreateModal();
     },
     logout() {
       store.dispatch('logout');

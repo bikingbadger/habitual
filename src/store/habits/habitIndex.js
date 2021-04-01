@@ -9,6 +9,7 @@ export default {
         {
           id: 1,
           name: 'Read ',
+          description: 'Read for 45 minutes daily',
           history: [
             { habitId: 1, date: '01/02/21', completed: true },
             { habitId: 1, date: '02/02/21', completed: false },
